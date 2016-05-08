@@ -3,27 +3,26 @@ import { Hero } from './hero';
 import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
-  selector:"my-app",
-  template:`
+  selector: "my-app",
+  template: `
   <div class="container">
   <h1>{{title}}</h1>
   <div class ="row">
-
-  <ul class="collection col s2">
-      <li class="collection-item badge" *ngFor="let hero of heroes"
-       (click)=onSelect(hero)>
-        <span>{{hero.id}}</span>  {{hero.name}}
-      </li>
-    </ul>
-    <hero-detail-component ></hero-detail-component>
-      `
+      <ul class="collection col s2">
+          <li  class="collection-item" *ngFor="let hero of heroes" (click)="onSelect(hero)">
+            <span>{{hero.id}}</span>  {{hero.name}}</li>
+      </ul>
+  </div>
+      <my-hero-detail [hero]="selectedHero" ></my-hero-detail>
+    </div>`
+    , directives: [HeroDetailComponent]
     })
 export class AppComponent {
   title:"My Heroes";
   heroes=HEROES;
   selectedHero:Hero;
   onSelect(hero:Hero) {this.selectedHero = hero;
-  console.log(hero);}
+  console.log(this.selectedHero);}
 
 }
 
